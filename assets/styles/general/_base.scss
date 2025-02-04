@@ -1,0 +1,21 @@
+@use "../abstract/mixins";
+@use "../abstract/variable" as var;
+
+@font-face {
+    font-family: "sourcecodepro";
+    src: url(../../font/SourceCodePro-Regular.ttf);
+}
+
+@font-face {
+    font-family: "sourcecodeprobold";
+    src: url(../../font/SourceCodePro-Bold.ttf);
+}
+
+
+body {
+    font-family: "sourcecodepro";
+}
+
+h2 {
+    font-family: "sourcecodeprobold";
+}

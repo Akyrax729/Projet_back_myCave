@@ -2,16 +2,38 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <link rel="icon" href="{{asset ('img/logo.png')}}">
+        {{ encore_entry_link_tags('app') }}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            {% block header %}
+                <nav>
+                    <ul>
+                        <li><a href="{{ path ('app_home') }}">Accueil</a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        {% if app.user == NULL %}
+                            <li><a href="{{ path ('app_register') }}">S'enregistrer</a></li>
+                            <li><a href="{{ path ('app_login') }}">Se connecter</a></li>
+                        {% endif %}
+                        {% if app.user != NULL %}
+                            <li><a href="{{ path ('app_profil') }}">Mon Profil</a></li>
+                            <li><a href="{{ path ('app_logout') }}">Se déconnecter</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endblock %}
+        </header>
+
+        <main>{% block main %}{% endblock %}</main>
+
+        <footer>
+            {% block footer %}
+            
+            {% endblock %}
+        </footer>
     </body>
 </html>
