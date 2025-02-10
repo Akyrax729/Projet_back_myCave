@@ -1,2 +1,29 @@
 @use '../abstract/mixins';
 @use '../abstract/variable' as var;
+
+footer {
+    // margin-top: 2rem;
+    @include mixins.flex($justify: space-between);
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    div {
+
+        a {
+            @include mixins.hover();
+        }
+    }
+
+    ul {
+        @include mixins.flex();
+
+        li {
+            padding: 0 1rem;
+
+            a {
+                @include mixins.hover();
+                font-size: 22px;
+            }
+        }
+    }
+}

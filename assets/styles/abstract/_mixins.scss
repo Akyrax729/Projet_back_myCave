@@ -8,15 +8,35 @@
     flex-wrap: $wrap;
 }
 
-@mixin hover ($hcolor: var.$hovercolor, $bgcolor: inherit) {
+@mixin hover ($hcolor: var.$hovercolor) {
 
     transition: all 300ms;
     display: block;
+    color: white;
+    position: relative;
+    font-size: 24px;
+    z-index: 2;
 
     &:hover {
-        background-color: $bgcolor;
         color: $hcolor;
         transform: scale(1.1);
-        text-decoration: underline;
+        // text-decoration: underline;
+    }
+        
+    &::before {
+        position: absolute;
+        content: "";
+        background-color: var.$secondarycolor;
+        height: 10px;
+        width: 0px;
+        top: 70%;
+        left: -5%;
+        z-index: -1;
+        transition: all 0.3s;
+        
+    }
+
+    &:hover::before {
+        width: 110%;
     }
 }

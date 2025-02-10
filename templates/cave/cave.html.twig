@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collection des caves{% endblock %}
+
+{% block main %}
+    <section id="cave">
+        <a class="view" href=" {{ path ('app_cavecreate') }} ">Créé votre cave numérique dès maintenant !</a>
+        <div id="caves">
+            {% for cave in caves %}
+                <div>
+                    <h2> {{cave.name}} </h2>
+                    <p> {{cave.description}} </p>
+                    <a href="{{ path ('app_caveview', {'id':cave.id}) }}">Visiter</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

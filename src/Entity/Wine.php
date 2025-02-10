@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\WineRepository;
+use Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
 
 #[ORM\Entity(repositoryClass: WineRepository::class)]
 class Wine
@@ -33,12 +34,12 @@ class Wine
 
     #[ORM\OneToOne(inversedBy: 'wine', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?region $region = null;
+    private ?Region $region = null;
 
     /**
      * @var Collection<int, cave>
      */
-    #[ORM\ManyToMany(targetEntity: cave::class, inversedBy: 'wines')]
+    #[ORM\ManyToMany(targetEntity: Cave::class, inversedBy: 'wines')]
     private Collection $cave;
 
     public function __construct()
@@ -115,12 +116,12 @@ class Wine
         return $this;
     }
 
-    public function getRegion(): ?region
+    public function getRegion(): ?Region
     {
         return $this->region;
     }
 
-    public function setRegion(region $region): static
+    public function setRegion(Region $region): static
     {
         $this->region = $region;
 
@@ -135,7 +136,7 @@ class Wine
         return $this->cave;
     }
 
-    public function addCave(cave $cave): static
+    public function addCave(Cave $cave): static
     {
         if (!$this->cave->contains($cave)) {
             $this->cave->add($cave);
@@ -144,7 +145,7 @@ class Wine
         return $this;
     }
 
-    public function removeCave(cave $cave): static
+    public function removeCave(Cave $cave): static
     {
         $this->cave->removeElement($cave);
 

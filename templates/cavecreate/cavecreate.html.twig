@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de votre cave{% endblock %}
+
+{% block main %}
+    <section id="form">
+        {{form_start(caveform)}}
+            <h2>Création de votre cave</h2>
+            {{form_widget(caveform)}}
+            <button>S'enregistrer</button>
+        {{form_end(caveform)}}
+    </section>
+{% endblock %}

@@ -1,2 +1,34 @@
 @use '../abstract/mixins';
 @use '../abstract/variable' as var;
+
+header {
+    margin-top: 1px;
+    // margin-bottom: 2rem;
+    @include mixins.flex($justify: space-between);
+    padding: 0 2rem;
+    position: relative;
+    border-top: solid var.$secondarycolor 2px;
+    border-bottom: solid var.$secondarycolor 2px;
+    background-color: var.$backgroundcolor;
+
+    img {
+        height: 70px;
+    }
+
+    nav {
+        z-index: 1;
+
+        ul {
+            @include mixins.flex();
+
+            li {
+                padding: 1rem;
+
+                a {
+                    @include mixins.hover();
+                        
+                }
+            }
+        }
+    }
+}

@@ -22,13 +22,13 @@ class Cave
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?user $user = null;
+    #[ORM\OneToOne()]
+    private ?User $user = null;
 
     /**
      * @var Collection<int, Wine>
      */
-    #[ORM\ManyToMany(targetEntity: Wine::class, mappedBy: 'cave')]
+    #[ORM\ManyToMany(targetEntity: Wine::class, mappedBy: 'cave', cascade: ['persist', 'remove'])]
     private Collection $wines;
 
     public function __construct()
@@ -65,12 +65,12 @@ class Cave
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

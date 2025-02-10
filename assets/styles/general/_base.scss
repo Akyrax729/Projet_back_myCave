@@ -2,20 +2,36 @@
 @use "../abstract/variable" as var;
 
 @font-face {
-    font-family: "sourcecodepro";
-    src: url(../../font/SourceCodePro-Regular.ttf);
+    font-family: "sourcesanspro";
+    src: url(../../font/SourceSansPro-Regular.ttf);
 }
 
 @font-face {
-    font-family: "sourcecodeprobold";
-    src: url(../../font/SourceCodePro-Bold.ttf);
+    font-family: "sourcesansprobold";
+    src: url(../../font/SourceSansPro-Bold.ttf);
 }
+
 
 
 body {
-    font-family: "sourcecodepro";
+    font-family: "sourcesanspro";
+    font-size: 16px;
+    background-color: var.$backgroundcolor;
+    background-image: url("https://www.transparenttextures.com/patterns/retina-wood.png");
+}
+
+main {
+    min-height: 85vh;
 }
 
 h2 {
-    font-family: "sourcecodeprobold";
+    font-family: "sourcesansprobold";
+}
+
+.active {
+    
+    &:before {
+        width: 110%;
+        background-color: var.$primarycolor;
+    }
 }

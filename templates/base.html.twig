@@ -10,17 +10,17 @@
     <body>
         <header>
             {% block header %}
+                <a href="{{ path ('app_home') }}"><img src="{{ asset ('img/logo2.png')}}" alt="Logo myCave"></a>               
                 <nav>
                     <ul>
-                        <li><a href="{{ path ('app_home') }}">Accueil</a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
+                        <li><a class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}" href="{{ path ('app_home') }}">Accueil</a></li>
+                        <li><a class="{% if app.request.attributes.get('_route') == 'app_cave' %}active{% endif %}" href="{{ path ('app_cave') }}">Cave</a></li>
                         {% if app.user == NULL %}
-                            <li><a href="{{ path ('app_register') }}">S'enregistrer</a></li>
-                            <li><a href="{{ path ('app_login') }}">Se connecter</a></li>
+                            <li><a class="{% if app.request.attributes.get('_route') == 'app_register' %}active{% endif %}" href="{{ path ('app_register') }}">S'enregistrer</a></li>
+                            <li><a class="{% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}" href="{{ path ('app_login') }}">Se connecter</a></li>
                         {% endif %}
                         {% if app.user != NULL %}
-                            <li><a href="{{ path ('app_profil') }}">Mon Profil</a></li>
+                            <li><a class="{% if app.request.attributes.get('_route') == 'app_profil' %}active{% endif %}" href="{{ path ('app_profil') }}">Mon Profil</a></li>
                             <li><a href="{{ path ('app_logout') }}">Se déconnecter</a></li>
                         {% endif %}
                     </ul>
@@ -32,7 +32,17 @@
 
         <footer>
             {% block footer %}
-            
+                <a href="{{ path ('app_home') }}"><img src="{{ asset ('img/logo.png')}}" alt="Logo myCave"></a>
+                <ul>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href=" {{ path ('app_contact')}} ">Contact</a></li>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href="">Mention Légales</a></li>
+                </ul>                
+                <ul>
+                    <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-discord"></i></a></li>
+                </ul>
             {% endblock %}
         </footer>
     </body>

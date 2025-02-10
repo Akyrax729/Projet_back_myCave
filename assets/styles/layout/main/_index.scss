@@ -1,0 +1,14 @@
+@use '../../abstract/mixins';
+@use '../../abstract/variable' as var;
+
+#index {
+    padding: 2rem 1rem;
+    margin: 0 20%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+}

@@ -25,7 +25,7 @@ class RegisterType extends AbstractType
                     'label' => 'Mot de passe',
                 ],
                 'second_options' => [
-                    'label' => 'Confirmer le nouveau mot de passe',
+                    'label' => 'Confirmer le mot de passe',
                 ],
                 'invalid_message' => 'Les mots de passes doivent correspondre.',
                 'constraints' => [

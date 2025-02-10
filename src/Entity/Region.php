@@ -17,7 +17,7 @@ class Region
     private ?string $label = null;
 
     #[ORM\ManyToOne(inversedBy: 'regions')]
-    private ?country $country = null;
+    private ?Country $country = null;
 
     public function getId(): ?int
     {
@@ -36,12 +36,12 @@ class Region
         return $this;
     }
 
-    public function getCountry(): ?country
+    public function getCountry(): ?Country
     {
         return $this->country;
     }
 
-    public function setCountry(?country $country): static
+    public function setCountry(?Country $country): static
     {
         $this->country = $country;
 
