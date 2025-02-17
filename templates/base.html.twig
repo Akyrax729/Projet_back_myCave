@@ -20,9 +20,10 @@
                             <li><a class="{% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}" href="{{ path ('app_login') }}">Se connecter</a></li>
                         {% endif %}
                         {% if app.user != NULL %}
-                            <li><a class="{% if app.request.attributes.get('_route') == 'app_profil' %}active{% endif %}" href="{{ path ('app_profil') }}">Mon Profil</a></li>
+                            <li><a class="{% if app.request.attributes.get('_route') == 'app_profil' %}active{% endif %}" href="{{ path ('app_profil') }}">Ma cave</a></li>
                             <li><a href="{{ path ('app_logout') }}">Se déconnecter</a></li>
                         {% endif %}
+                        <li><a href=" {{path('app_admin')}} ">Admin</a></li>
                     </ul>
                 </nav>
             {% endblock %}

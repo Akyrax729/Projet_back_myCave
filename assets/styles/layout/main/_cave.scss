@@ -6,7 +6,18 @@
     margin-top: 15px;
 
     .view {
+        display: block;
         background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        transition: all 0.3s;
+
+        &:hover {
+            transform: scale(1.1);
+            color: var.$hovercolor;
+        }
     }
     
     #caves {
@@ -23,6 +34,17 @@
 
             p {
                 padding: 0 2rem;
+            }
+
+            a {
+                display: block;
+                color: white;
+                transition: all 0.3s;
+
+                &:hover {
+                    transform: scale(1.1);
+                    color: var.$hovercolor;
+                }
             }
         }
     }

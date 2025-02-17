@@ -12,9 +12,11 @@ final class CaveController extends AbstractController{
     public function index(CaveRepository $caveRepository): Response
     {
         $caves = $caveRepository->findAll();
+        $user = $caveRepository->findBy(['user' => $this->getUser()]);
 
         return $this->render('cave/cave.html.twig', [
             'caves' => $caves,
+            'user' => $user
         ]);
     }
 }

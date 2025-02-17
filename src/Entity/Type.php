@@ -19,14 +19,14 @@ class Type
     private ?string $label = null;
 
     /**
-     * @var Collection<int, wine>
+     * @var Collection<int, Wine>
      */
-    #[ORM\ManyToMany(targetEntity: wine::class, inversedBy: 'types')]
-    private Collection $wine;
+    #[ORM\ManyToMany(targetEntity: Wine::class, mappedBy: 'type')]
+    private Collection $wines;
 
     public function __construct()
     {
-        $this->wine = new ArrayCollection();
+        $this->wines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,26 +47,30 @@ class Type
     }
 
     /**
-     * @return Collection<int, wine>
+     * @return Collection<int, Wine>
      */
-    public function getWine(): Collection
+    public function getWines(): Collection
     {
-        return $this->wine;
+        return $this->wines;
     }
 
-    public function addWine(wine $wine): static
+    public function addWine(Wine $wine): static
     {
-        if (!$this->wine->contains($wine)) {
-            $this->wine->add($wine);
+        if (!$this->wines->contains($wine)) {
+            $this->wines->add($wine);
+            $wine->addType($this);
         }
 
         return $this;
     }
 
-    public function removeWine(wine $wine): static
+    public function removeWine(Wine $wine): static
     {
-        $this->wine->removeElement($wine);
+        if ($this->wines->removeElement($wine)) {
+            $wine->removeType($this);
+        }
 
         return $this;
     }
-}
+
+    }
