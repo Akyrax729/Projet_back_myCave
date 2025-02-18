@@ -28,12 +28,12 @@ class Cave
     /**
      * @var Collection<int, Wine>
      */
-    #[ORM\ManyToMany(targetEntity: Wine::class, mappedBy: 'cave', cascade: ['persist', 'remove'])]
-    private Collection $wines;
+    #[ORM\OneToMany(targetEntity: Wine::class, mappedBy: 'cave')]
+    private Collection $wine;
 
     public function __construct()
     {
-        $this->wines = new ArrayCollection();
+        $this->wine = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,16 +80,16 @@ class Cave
     /**
      * @return Collection<int, Wine>
      */
-    public function getWines(): Collection
+    public function getWine(): Collection
     {
-        return $this->wines;
+        return $this->wine;
     }
 
     public function addWine(Wine $wine): static
     {
-        if (!$this->wines->contains($wine)) {
-            $this->wines->add($wine);
-            $wine->addCave($this);
+        if (!$this->wine->contains($wine)) {
+            $this->wine->add($wine);
+            $wine->setCave($this);
         }
 
         return $this;
@@ -97,10 +97,18 @@ class Cave
 
     public function removeWine(Wine $wine): static
     {
-        if ($this->wines->removeElement($wine)) {
-            $wine->removeCave($this);
+        if ($this->wine->removeElement($wine)) {
+            // set the owning side to null (unless already changed)
+            if ($wine->getCave() === $this) {
+                $wine->setCave(null);
+            }
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

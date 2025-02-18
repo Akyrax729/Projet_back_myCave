@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block main %}
+    <section id="profil">
+        <h2>Mon Profil</h2>
+        <div class="info">
+            <h3>Informations du compte</h3>
+            <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
+            <p><strong>Email :</strong> {{ user.email }}</p>
+            <p><strong>Rôle :</strong> 
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    Admin
+                {% else %}
+                    Utilisateur
+                {% endif %}
+            </p>
+        </div>
+        <div class="mycave">
+            <h2>Ma cave</h2>
+            <strong>Détails de votre cave</strong>
+            <a href=" {{ path ('app_wine_new')}} ">Ajouter une bouteille à votre collection</a>
+            <ul>
+                {% for wine in wines %}
+                    <li>
+                        <h3>{{ wine.name }} - {{ wine.year }}</h3>
+                        <img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}">
+                        <p>{{ wine.description }}</p>
+                        <p>{{ wine.cepage }}</p>
+                        <p>{{ wine.region }}  - {{ wine.region.country }}</p>
+                        {% if app.user == cave.user %}
+                            <div>
+                                <a href="{{ path ('app_wine_edit',{'id' : wine.id})}}">Modifier</a>
+                                <a href="{{ path ('app_wine_delete', {'id' : wine.id})}}">Supprimer</a>
+                            </div>
+                        {% endif %}
+                    </li>
+
+                {% endfor %}
+            </ul>   
+        </div>
+    </section>
+{% endblock %}
+

@@ -5,11 +5,8 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\WineRepository;
-use Vich\UploaderBundle\Entity\File;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
 
 #[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: WineRepository::class)]
@@ -38,28 +35,15 @@ class Wine
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, cave>
-     */
-    #[ORM\ManyToMany(targetEntity: Cave::class, inversedBy: 'wines')]
-    private Collection $cave;
-
     #[ORM\ManyToOne(inversedBy: 'wines')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Region $Region = null;
 
-    /**
-     * @var Collection<int, Type>
-     */
-    #[ORM\ManyToMany(targetEntity: Type::class, inversedBy: 'wines')]
-    private Collection $type;
-    
+    #[ORM\Column(length: 255)]
+    private ?string $Cepage = null;
 
-    public function __construct()
-    {
-        $this->cave = new ArrayCollection();
-        $this->type = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'wine')]
+    private ?Cave $cave = null;
 
     public function getId(): ?int
     {
@@ -102,38 +86,12 @@ class Wine
         return $this;
     }
 
-
-
-    /**
-     * @return Collection<int, cave>
-     */
-    public function getCave(): Collection
-    {
-        return $this->cave;
-    }
-
-    public function addCave(Cave $cave): static
-    {
-        if (!$this->cave->contains($cave)) {
-            $this->cave->add($cave);
-        }
-
-        return $this;
-    }
-
-    public function removeCave(Cave $cave): static
-    {
-        $this->cave->removeElement($cave);
-
-        return $this;
-    }
-
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
         if ($imageFile) {
-            // Si un fichier est chargé, met à jour la date
+            // Si un fichier est charge, met à jour la date
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
@@ -165,26 +123,26 @@ class Wine
         return $this;
     }
 
-    /**
-     * @return Collection<int, Type>
-     */
-    public function getType(): Collection
+    public function getCepage(): ?string
     {
-        return $this->type;
+        return $this->Cepage;
     }
 
-    public function addType(Type $type): static
+    public function setCepage(string $Cepage): static
     {
-        if (!$this->type->contains($type)) {
-            $this->type->add($type);
-        }
+        $this->Cepage = $Cepage;
 
         return $this;
     }
 
-    public function removeType(Type $type): static
+    public function getCave(): ?Cave
     {
-        $this->type->removeElement($type);
+        return $this->cave;
+    }
+
+    public function setCave(?Cave $cave): static
+    {
+        $this->cave = $cave;
 
         return $this;
     }

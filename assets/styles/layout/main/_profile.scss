@@ -1,6 +1,45 @@
 @use '../../abstract/mixins';
 @use '../../abstract/variable' as var;
 
-#profile {
-    
+#profil {
+    @include mixins.flex(column);
+
+    h2 {
+        color: white;
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .info {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        color: white;
+        padding: 1rem;
+        padding-left: 2rem;
+        min-width: 400px;
+        margin-bottom: 2rem;
+    }
+
+    .mycave {
+        @include mixins.flex(column);
+        margin: 0 2%;
+
+        ul {
+            @include mixins.flex(row, $wrap: wrap);
+
+            li {
+                @include mixins.flex(column);
+                background-color: rgba(245, 222, 179, 0.3);
+                padding: 0.5rem 1rem;
+                margin: 0.5rem;
+                min-height: 450px;
+                min-width: 300px;
+
+                img {
+                    height: 300px;
+                    width: 200px;
+                }
+            }
+        }
+    }
 }

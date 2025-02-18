@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Cave;
 use App\Entity\Wine;
 use App\Form\WineType;
 use App\Repository\WineRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/wine')]
 final class WineController extends AbstractController{
@@ -28,11 +29,26 @@ final class WineController extends AbstractController{
         $form = $this->createForm(WineType::class, $wine);
         $form->handleRequest($request);
 
+        $session = $request->getSession();
+        $userSession = $session->get('user');
+
+        if (!$userSession || !isset($userSession['id'])) {
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
+        }
+        $user = $entityManager->getRepository(\App\Entity\User::class)->find($userSession['id']);
+        $cave = $entityManager->getRepository(Cave::class)->findOneBy(['user' => $user]);
+
+        if (!$cave) {
+            $cave = new Cave();
+            $cave->setUser($user);
+            $entityManager->persist($cave);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($wine);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_wine_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('wine/new.html.twig', [
@@ -58,7 +74,7 @@ final class WineController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_wine_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('wine/edit.html.twig', [
@@ -75,6 +91,6 @@ final class WineController extends AbstractController{
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_wine_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
     }
 }

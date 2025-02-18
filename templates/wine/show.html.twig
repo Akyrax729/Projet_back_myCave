@@ -2,15 +2,11 @@
 
 {% block title %}Wine{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Wine</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ wine.id }}</td>
-            </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ wine.name }}</td>
@@ -26,6 +22,14 @@
             <tr>
                 <th>ImageName</th>
                 <td>{{ wine.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Cépage</th>
+                <td>{{ wine.cepage}}</td>
+            </tr>
+            <tr>
+                <th>Région - Pays</th>
+                <td>{{ wine.region}} - {{ wine.region.country }} </td>
             </tr>
         </tbody>
     </table>

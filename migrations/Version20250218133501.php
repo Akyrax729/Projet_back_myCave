@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250217111727 extends AbstractMigration
+final class Version20250218133501 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,16 @@ final class Version20250217111727 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE wine ADD region_id INT NOT NULL');
-        $this->addSql('ALTER TABLE wine ADD CONSTRAINT FK_560C646898260155 FOREIGN KEY (region_id) REFERENCES region (id)');
-        $this->addSql('CREATE INDEX IDX_560C646898260155 ON wine (region_id)');
+        $this->addSql('ALTER TABLE user ADD cave_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D6497F05B85 FOREIGN KEY (cave_id) REFERENCES `user` (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D6497F05B85 ON user (cave_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE wine DROP FOREIGN KEY FK_560C646898260155');
-        $this->addSql('DROP INDEX IDX_560C646898260155 ON wine');
-        $this->addSql('ALTER TABLE wine DROP region_id');
+        $this->addSql('ALTER TABLE `user` DROP FOREIGN KEY FK_8D93D6497F05B85');
+        $this->addSql('DROP INDEX UNIQ_8D93D6497F05B85 ON `user`');
+        $this->addSql('ALTER TABLE `user` DROP cave_id');
     }
 }

@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CaveviewController!{% endblock %}
+{% block title %}Voir la cave{% endblock %}
 
 {% block main %}
-
+    <section id="view">
+       <h2> {{ cave.name }} </h2>
+       {# <p>{{wine.cave}}</p> #}
+       {% for wine in wines %}
+            <h3>{{ wine.name }} - {{ wine.year }}</h3>
+            <img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}">
+            <p>{{ wine.description }}</p>
+            <p>{{ wine.cepage }}</p>
+            <p>{{ wine.region }}  - {{ wine.region.country }}</p>
+       {% endfor %}
+    </section>
 {% endblock %}

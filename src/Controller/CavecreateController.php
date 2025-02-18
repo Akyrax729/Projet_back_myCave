@@ -24,8 +24,9 @@ final class CavecreateController extends AbstractController{
 
         if($form->isSubmitted() && $form->isValid())
         {
-
             $cave->setUser($get);
+
+            dd($cave);
 
             $entityManager->persist($cave);
 

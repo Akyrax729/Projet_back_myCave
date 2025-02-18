@@ -4,14 +4,16 @@
 
 {% block main %}
     <section id="cave">
-        {% if caves|filter(c => c.user == app.user)|length == 0 %}
+        {# {% if caves|filter(c => c.user == app.user)|length == 0 %}
             <a class="view" href=" {{ path ('app_cavecreate') }} ">Créé votre cave numérique dès maintenant !</a>
-        {% endif %}
+        {% endif %} #}
         <div id="caves">
             {% for cave in caves %}
-                <div>
+                <div class="card">
                     <h2> {{cave.name}} </h2>
                     <p> {{cave.description}} </p>
+
+
                     <a href="{{ path ('app_caveview', {'id':cave.id}) }}">Visiter</a>
                 </div>
             {% endfor %}

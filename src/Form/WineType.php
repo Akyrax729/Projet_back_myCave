@@ -21,6 +21,7 @@ class WineType extends AbstractType
         $builder
             ->add('name')
             ->add('year')
+            ->add('Cepage')
             ->add('description')
             ->add('imageFile', FileType::class,[
                 'required' => false,
@@ -37,17 +38,10 @@ class WineType extends AbstractType
                     ])
                 ],
             ])
-            ->add('type', EntityType::class, [
-                'class' => Type::class,
-                'choice_label' => 'label',
-                'multiple' => true,
-                'expanded'  => true,
-            ])
             ->add('Region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'label',     
-            ])
-        ;
+            ])        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

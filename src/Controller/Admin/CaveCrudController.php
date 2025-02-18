@@ -15,14 +15,13 @@ class CaveCrudController extends AbstractCrudController
         return Cave::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
+            TextField::new('name'),
             TextEditorField::new('description'),
         ];
     }
-    */
+    
 }
