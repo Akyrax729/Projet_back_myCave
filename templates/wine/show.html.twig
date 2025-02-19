@@ -5,34 +5,11 @@
 {% block main %}
     <h1>Wine</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ wine.name }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ wine.year }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ wine.description }}</td>
-            </tr>
-            <tr>
-                <th>ImageName</th>
-                <td>{{ wine.imageName }}</td>
-            </tr>
-            <tr>
-                <th>Cépage</th>
-                <td>{{ wine.cepage}}</td>
-            </tr>
-            <tr>
-                <th>Région - Pays</th>
-                <td>{{ wine.region}} - {{ wine.region.country }} </td>
-            </tr>
-        </tbody>
-    </table>
+    <h3>{{ wine.name }} - {{ wine.year }}</h3>
+    <div class="img"><img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}"></div>
+    <p>{{ wine.description }}</p>
+    <p><strong>Cépage</strong> : {{ wine.cepage }}</p>
+    <p><strong>Origine</strong> : {{ wine.region }}  - {{ wine.region.country }}</p>
 
     <a href="{{ path('app_wine_index') }}">back to list</a>
 

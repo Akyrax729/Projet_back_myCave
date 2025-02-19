@@ -3,15 +3,20 @@
 {% block title %}Voir la cave{% endblock %}
 
 {% block main %}
-    <section id="view">
+    <section id="profil">
        <h2> {{ cave.name }} </h2>
-       {# <p>{{wine.cave}}</p> #}
-       {% for wine in wines %}
-            <h3>{{ wine.name }} - {{ wine.year }}</h3>
-            <img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}">
-            <p>{{ wine.description }}</p>
-            <p>{{ wine.cepage }}</p>
-            <p>{{ wine.region }}  - {{ wine.region.country }}</p>
-       {% endfor %}
+       <div class="mycave">
+            <ul>
+            {% for wine in wines %}
+                    <li>
+                        <h3>{{ wine.name }} - {{ wine.year }}</h3>
+                        <div class="img"><img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}"></div>
+                        <p>{{ wine.description }}</p>
+                        <p><strong>Cépage</strong> : {{ wine.cepage }}</p>
+                        <p><strong>Origine</strong> : {{ wine.region }}  - {{ wine.region.country }}</p>
+                    </li>
+            {% endfor %}
+            </ul>
+       </div>
     </section>
 {% endblock %}

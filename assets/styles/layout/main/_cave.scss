@@ -21,16 +21,16 @@
     }
     
     #caves {
-        display: grid;
-        grid-template-columns: 30fr 30fr 30fr;
-        grid-template-rows: auto;
-        gap: 1rem;
+        @include mixins.flex(row, $wrap: wrap);
 
         .card {
             @include mixins.flex(column, space-between);
             background-color: rgba(0, 0, 0, 0.2);
+            color: rgb(244, 237, 225);
             padding: 0.7rem;
-            height: 200px;
+            margin: 0.5rem;
+            height: 300px;
+            width: 200px;
 
             p {
                 padding: 0 2rem;
@@ -41,6 +41,7 @@
                 display: block;
                 color: white;
                 transition: all 0.3s;
+                font-size: 24px;
 
                 &:hover {
                     transform: scale(1.1);

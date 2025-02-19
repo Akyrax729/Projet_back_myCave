@@ -2,7 +2,7 @@
 @use '../abstract/variable' as var;
 
 footer {
-    // margin-top: 2rem;
+    margin-top: 2rem;
     @include mixins.flex($justify: space-between);
     padding: 1rem 2rem;
     background-color: rgba(0, 0, 0, 0.7);
@@ -24,6 +24,16 @@ footer {
                 @include mixins.hover();
                 font-size: 22px;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    footer {
+        @include mixins.flex(column);
+
+        ul, img {
+            margin-bottom: 1rem;
         }
     }
 }

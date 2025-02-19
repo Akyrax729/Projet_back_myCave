@@ -12,7 +12,7 @@ final class CaveviewController extends AbstractController{
     #[Route('/cave/{id}', name: 'app_caveview')]
     public function index(Cave $cave, WineRepository $wineRepository): Response
     {
-        $wines =$wineRepository->findAll();
+        $wines =$wineRepository->findBy(['cave' => $cave]);
 
         return $this->render('caveview/caveview.html.twig', [
             'cave'=>$cave,

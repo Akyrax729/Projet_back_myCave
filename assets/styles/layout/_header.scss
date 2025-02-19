@@ -3,7 +3,6 @@
 
 header {
     margin-top: 1px;
-    // margin-bottom: 2rem;
     @include mixins.flex($justify: space-between);
     padding: 0 2rem;
     position: relative;
@@ -30,5 +29,32 @@ header {
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+   header {
+
+    nav {
+        ul {
+            li {
+                a {
+                    font-size: 20px;
+                }
+
+                
+            }
+            .admin {
+                display: none;
+            }
+        }
+    }
+   }
+    
+}
+
+@media screen and (max-width: 900px) {
+    header {
+      @include mixins.flex(column);
     }
 }

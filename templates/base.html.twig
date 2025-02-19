@@ -24,7 +24,7 @@
                             <li><a href="{{ path ('app_logout') }}">Se déconnecter</a></li>
                         {% endif %}
                         {% if is_granted('ROLE_ADMIN')  %}
-                            <li><a href=" {{path('app_admin')}} ">Admin</a></li>
+                            <li class="admin"><a href=" {{path('app_admin')}} ">Admin</a></li>
                         {% endif %}
 
                     </ul>
@@ -42,10 +42,10 @@
                     <li><a class="{% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href="">Mention Légales</a></li>
                 </ul>                
                 <ul>
-                    <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-discord"></i></a></li>
+                    <li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/"><i class="fa-brands fa-tiktok"></i></a></li>
+                    <li><a href="https://discord.com/"><i class="fa-brands fa-discord"></i></a></li>
                 </ul>
             {% endblock %}
         </footer>

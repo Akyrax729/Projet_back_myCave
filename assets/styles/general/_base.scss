@@ -21,7 +21,7 @@ body {
 }
 
 main {
-    min-height: 85vh;
+    min-height: 80vh;
 }
 
 h2 {
@@ -34,4 +34,11 @@ h2 {
         width: 110%;
         background-color: var.$primarycolor;
     }
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        min-height: 75vh;
+    }
+    
 }

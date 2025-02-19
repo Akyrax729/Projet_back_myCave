@@ -20,9 +20,22 @@
         margin-bottom: 2rem;
     }
 
+    a {
+        @include mixins.hover();
+        
+        &:hover {
+            transform: scale(1);
+        }
+    }
+
     .mycave {
         @include mixins.flex(column);
         margin: 0 2%;
+
+        h3 {
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
 
         ul {
             @include mixins.flex(row, $wrap: wrap);
@@ -33,12 +46,20 @@
                 padding: 0.5rem 1rem;
                 margin: 0.5rem;
                 height: 550px;
-                width: 300px;
+                width: 350px;
+
+                .img {
+                    @include mixins.flex();
+                    background-color: rgba(0, 0, 0, 0.3);
+                    height: 200px;
+                    margin-top: 0.5rem;
+                    max-width: 80%;
+                    min-width: 30%;
+                }
 
                 img {
-                    height: 300px;
-                    width: 200px;
-                    margin-top: 0.5rem;
+                    height: 200px;
+                    
                 }
 
                 p {
@@ -46,6 +67,15 @@
                     margin-top: 0.5rem;
                     text-align: justify;
                     align-self: flex-start;
+                }
+
+                .link {
+                    @include mixins.flex(column, center);
+                    margin-top: auto;
+
+                    a {
+                        margin-top: 0.5rem;
+                    }
                 }
             }
         }
