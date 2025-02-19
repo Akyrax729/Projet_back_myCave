@@ -27,14 +27,16 @@
                         <h3>{{ wine.name }} - {{ wine.year }}</h3>
                         <img src="{{asset('images/'~wine.imagename)}}" alt="{{wine.name}}">
                         <p>{{ wine.description }}</p>
-                        <p>{{ wine.cepage }}</p>
-                        <p>{{ wine.region }}  - {{ wine.region.country }}</p>
-                        {% if app.user == cave.user %}
+                        <p><strong>Cépage</strong> : {{ wine.cepage }}</p>
+                        <p><strong>Origine</strong> : {{ wine.region }}  - {{ wine.region.country }}</p>
+ 
+                        {% if app.user == user %}
                             <div>
                                 <a href="{{ path ('app_wine_edit',{'id' : wine.id})}}">Modifier</a>
                                 <a href="{{ path ('app_wine_delete', {'id' : wine.id})}}">Supprimer</a>
                             </div>
                         {% endif %}
+
                     </li>
 
                 {% endfor %}

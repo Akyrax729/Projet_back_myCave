@@ -23,7 +23,10 @@
                             <li><a class="{% if app.request.attributes.get('_route') == 'app_profil' %}active{% endif %}" href="{{ path ('app_profil') }}">Ma cave</a></li>
                             <li><a href="{{ path ('app_logout') }}">Se déconnecter</a></li>
                         {% endif %}
-                        <li><a href=" {{path('app_admin')}} ">Admin</a></li>
+                        {% if is_granted('ROLE_ADMIN')  %}
+                            <li><a href=" {{path('app_admin')}} ">Admin</a></li>
+                        {% endif %}
+
                     </ul>
                 </nav>
             {% endblock %}

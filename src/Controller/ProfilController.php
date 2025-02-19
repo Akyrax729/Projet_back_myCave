@@ -15,10 +15,11 @@ class ProfilController extends AbstractController
     {
         
         $user = $this->getUser();
+        
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
-        $cave = $caveRepository->findOneBy(['user' => $user]);
+        $cave = $caveRepository->findBy(['user' => $user]);
         $wines = $wineRepo->findBy(['cave' => $cave]);
 
         return $this->render('profil/profil.html.twig', [

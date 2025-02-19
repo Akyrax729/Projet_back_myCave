@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cave;
+use App\Entity\User;
 use App\Entity\Wine;
 use App\Form\WineType;
 use App\Repository\WineRepository;
@@ -29,22 +30,21 @@ final class WineController extends AbstractController{
         $form = $this->createForm(WineType::class, $wine);
         $form->handleRequest($request);
 
-        $session = $request->getSession();
-        $userSession = $session->get('user');
-
-        if (!$userSession || !isset($userSession['id'])) {
-            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
-        }
-        $user = $entityManager->getRepository(\App\Entity\User::class)->find($userSession['id']);
-        $cave = $entityManager->getRepository(Cave::class)->findOneBy(['user' => $user]);
+        $user = $this->getUser();
+        $cave = $entityManager->getRepository(Cave::class)->findOneBy(['user' => $user]); 
 
         if (!$cave) {
             $cave = new Cave();
             $cave->setUser($user);
+            $cave->setName('Cave de ' . $user->getUsername());
+            $cave->setDescription('Cave de ' . $user->getUsername());
+            $user->setCave($cave);
             $entityManager->persist($cave);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $wine->setCave($cave);
             $entityManager->persist($wine);
             $entityManager->flush();
 
